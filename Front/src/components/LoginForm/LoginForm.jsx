@@ -1,9 +1,8 @@
 import { useState } from "react";
 import "./LoginForm.css";
-
 import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/slices/auth";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 
 // eslint-disable-next-line react/prop-types
@@ -12,8 +11,9 @@ export default function LoginForm() {
     email: "tony@stark.com",
     password: "password123",
   });
+  const [error, setError] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -32,17 +32,20 @@ export default function LoginForm() {
       },
       body: JSON.stringify(formData),
     });
+    console.log(response)
     const data = await response.json();
-    if (data.body.token) {
-      dispatch(setToken(data.body.token));
-      navigate('/user')
+    if (response.status !== 200) {
+      return setError(true)
     }
-  
+    setError(false);
+    dispatch(setToken(data.body.token));
+    navigate("/user");
     } 
   return (
     <section className="sign-in-content">
       <i className="fa fa-user-circle sign-in-icon"></i>
       <h1>Sign In</h1>
+      {error && <p className="error">Invalid email or password</p>}
       <form onSubmit={handleLogin}>
         <div className="input-wrapper">
           <label htmlFor="username">Username</label>
@@ -71,7 +74,6 @@ export default function LoginForm() {
           <button type="submit" className="sign-in-button">
             Sign In
           </button>
-
       </form>
     </section>
   )
