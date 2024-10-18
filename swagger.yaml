@@ -58,7 +58,7 @@ paths:
         '500':
           description: Internal Server Error
   /user/profile:
-    post:
+    get:
       security:
         - Bearer: []
       tags:
@@ -101,12 +101,122 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /transactions/{accountId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        -  Transactions Module
+      summary: Transactions API
+      description: Get all transactions by accouts
+      parameters:
+        -  in: path
+           name: accountId
+           description: User account id
+           required: true
+           type: string
+      responses:
+        '200':
+          description: All transations retireved successfully
+          schema:
+            $ref: "#/definitions/Transactions"
+        '401':
+          description: Not allowed
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '500':
+          description: Internal error
+  /transaction/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        -  Transactions Module
+      summary: Transactions API
+      description:  Get  transaction by accounts
+      parameters:
+        -  in: path
+           name: transactionId
+           description: User account id
+           required: true
+           type: string
+      responses:
+        '200':
+          description:  transation retireved successfully
+          schema:
+            $ref: "#/definitions/Transactions"
+        '401':
+          description: Not allowed
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '500':
+          description: Internal error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        -  Transactions Module
+      summary: edit Transaction Details
+      description: edit transaction
+      parameters:
+        -  in: path
+           name: transactionId
+           description: new details for the transaction
+           required: true
+           type: string
+        -  in: body
+           name: body
+           description: category and/or note
+           required: true
+           schema:
+            $ref: '#/definitions/TransactionBody'
+           
+      responses:
+        '200':
+          description: transation updated successfully
+          schema:
+            $ref: "#/definitions/TransactionBody"
+        '401':
+          description: Not allowed
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '500':
+          description: Internal error
+     
 securityDefinitions:
   Bearer:
     type: apiKey
     name: Authorization
     in: header
 definitions:
+  TransactionBody:
+    properties:
+      note:
+        type: string
+      category:
+        type: string
+  Transaction:
+    properties:
+      id:
+        type: string
+      amount:
+        type: string
+      userId:
+        type: string
+      accountId:
+        type: string
+      date:
+        type: string
+    
+  Transactions:
+    items:
+      $ref: '#/definitions/Transaction'
   User:
     properties:
       email:
@@ -156,3 +266,4 @@ definitions:
     properties:
       userName:
         type: string
+       
