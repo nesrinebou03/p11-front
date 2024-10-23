@@ -1,7 +1,7 @@
 
-import IconChat from "../../assets/icon-chat.png";
-import IconMoney from "../../assets/icon-money.png";
-import IconSecurity from "../../assets/icon-security.png";
+import IconChat from "../../assets/icon-chat.webp";
+import IconMoney from "../../assets/icon-money.webp";
+import IconSecurity from "../../assets/icon-security.webp";
 
 import "./Information.css"
 export default function Information(){
