@@ -25,6 +25,7 @@
   
   .input-remember {
     display: flex;
+    margin-left: 20px;
   }
   .Sign-icone{
     width: 100px;
@@ -43,6 +44,7 @@
     text-align: left;
     margin-bottom: 1rem;
     color: black;
+    margin-left: 20px;
   }
   
   .input-wrapper label {
@@ -59,4 +61,6 @@ background-color: #fff;
 color: black;
 
   }
-  
+.error{
+  color: red;
+}

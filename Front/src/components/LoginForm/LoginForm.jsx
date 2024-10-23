@@ -5,7 +5,6 @@ import { setToken } from "../../redux/slices/auth";
 import { useNavigate } from "react-router-dom";
 
 
-// eslint-disable-next-line react/prop-types
 export default function LoginForm() {
   const [formData, setFormData] = useState({
     email: "tony@stark.com",
