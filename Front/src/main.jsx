@@ -38,7 +38,9 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
+// Initialise l'application avec Redux et React Router.
+ //provider gere l'accès au store 
+ //RouterProvider gère la navigation 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
